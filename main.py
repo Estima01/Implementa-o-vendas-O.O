@@ -22,6 +22,9 @@ class Venda:
         self.produto.baixa(self.quantidade)
     def cancela_venda(self):
         self.produto.repor(self.quantidade)
+    def mostra(self):
+        print('Produto: ', self.produto.nome)
+        print('Quantidade: ', self.quantidade)
 #orientação a objetos produto
 class Produto:
     def __init__(self, nome, preco):
@@ -30,6 +33,9 @@ class Produto:
     def mostra(self):
         print('Produto: ', self.nome)
         print('Preço: ', self.preco)
+    def alterar_preco(self, novo_preco, nome_produto):
+        if self.nome == nome_produto:
+            self.preco = novo_preco
 
 #orientação a objetos preço
 class Preco:
@@ -68,6 +74,7 @@ def main():
             print('1 - Mostrar')
             print('2 - Baixa')
             print('3 - Repor')
+            print('4 - Alterar Preço')
             opcao = int(input('Digite a opção desejada: '))
             if opcao == 1:
                 estoque.mostra()
@@ -77,6 +84,11 @@ def main():
             elif opcao == 3:
                 quantidade = int(input('Digite a quantidade: '))
                 estoque.repor(quantidade)
+            elif opcao == 4:
+                novo_preco = float(input('Digite o novo preço: '))
+                nome_produto = input('Digite o nome do produto: ')
+                produto = Produto(nome_produto, novo_preco)
+
         elif opcao == 2:
             print('1 - Registrar Venda')
             print('2 - Cancelar Venda')
@@ -104,7 +116,7 @@ def main():
 #instanciando objetos
 estoque = Estoque('Camiseta', 10)
 produto = Produto('Camiseta', 50)
-preco = Preco(produto, 50)
+preco = Preco(produto, 30)
 venda = Venda(estoque, 5)
 item_venda = ItemVenda(produto, 5)
 
